@@ -1,0 +1,153 @@
+<script src="https://kit.fontawesome.com/e4e94b66e3.js" crossorigin="anonymous"></script>
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        background: #222;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .inner_body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 400px;
+        padding: 50px 0;
+        background: #222;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+    }
+
+    .faq_block {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        ;
+        min-width: 480px;
+    }
+
+    .faq_block+.faq_block {
+        margin-top: 10px;
+    }
+
+    .faq_header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .faq_header h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .faq_header button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .faq_header button i {
+        font-size: 18px;
+        color: #111;
+    }
+
+    .faq_body {
+        max-height: 0;
+        overflow: hidden;
+        background-color: #eee;
+        transition: max-height 0.3s ease-in-out;
+        padding: 0 10px;
+    }
+</style>
+
+<script>
+
+</script>
+
+<div class="inner_body">
+    <ul>
+        <li class="faq_block js-faq_block">
+            <div class="faq_header">
+                <h3>Question 1</h3>
+                <button type="button"><i class="fa-regular fa-square-plus"></i></button>
+            </div>
+            <div class="faq_body">
+                <p>How to use this?</p>
+            </div>
+        </li>
+        <li class="faq_block js-faq_block">
+            <div class="faq_header">
+                <h3>Question 2</h3>
+                <button type="button"><i class="fa-regular fa-square-plus"></i></button>
+            </div>
+            <div class="faq_body">
+                <p>How to use this?</p>
+            </div>
+        </li>
+        <li class="faq_block js-faq_block">
+            <div class="faq_header">
+                <h3>Question 3</h3>
+                <button type="button"><i class="fa-regular fa-square-plus"></i></button>
+            </div>
+            <div class="faq_body">
+                <p>How to use this?</p>
+            </div>
+        </li>
+        <li class="faq_block js-faq_block">
+            <div class="faq_header">
+                <h3>Question 4</h3>
+                <button type="button"><i class="fa-regular fa-square-plus"></i></button>
+            </div>
+            <div class="faq_body">
+                <p>How to use this?</p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script>
+    class FAQ {
+        constructor(target) {
+            this.target = typeof target === 'string' ? document.querySelector(target) : target;
+            this.faqBody = this.target.querySelector('.faq_body');
+            this.maxHeight = `${this.faqBody.scrollHeight}px`;
+            this.toggleBtn = this.target.querySelector('button');
+            this.opened = false;
+
+            this.init();
+        }
+
+        init() {
+            this.toggleBtn.addEventListener('click', () => {
+                this.toggleButton();
+            });
+        }
+
+        toggleButton() {
+            const buttonIcon = this.toggleBtn.querySelector('i');
+
+            if (this.opened) {
+                buttonIcon.classList.remove('fa-square-minus');
+                buttonIcon.classList.add('fa-square-plus');
+                this.faqBody.style.maxHeight = '0';
+                this.opened = false;
+            } else {
+                buttonIcon.classList.remove('fa-square-plus');
+                buttonIcon.classList.add('fa-square-minus');
+                this.faqBody.style.maxHeight = this.maxHeight;
+                this.opened = true;
+            }
+        }
+    }
+
+    const faqs = document.querySelectorAll('.js-faq_block');
+    faqs.forEach(faq => { new FAQ(faq); });
+</script>
